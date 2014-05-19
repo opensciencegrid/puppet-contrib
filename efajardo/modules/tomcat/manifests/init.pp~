@@ -1,25 +1,8 @@
-class tomcat
-{     
-   if $operatingsystemrelease=~ /5.*/
-    {
-       $slversion="5"
+# Instantiates the puppet class, see puppet::tomcat
+# Written by Edgar Fajardo (efajardo@physics.ucsd.edu)
+# For the OSG Software team
+class tomcat {
+  class {'tomcat::puppet':
+    package_instalation => "installed",
     }
-    elsif $operatingsystemrelease=~ /6.*/
-    {
-       $slversion="6"
-    }
-    $tomcat="tomcat${slversion}"
-    package { $tomcat:
-                   name   =>  "$tomcat",
-                   provider => 'yum',
-                   ensure => "installed"
-              }
-    service { 'tomcat':
-                 name => ${tomcat},
-                 ensure => running,
-                 enable => true
-               }
-
-     Package[$tomcat]->Service['tomcat']
-                                                                                                               
-}
+ }
