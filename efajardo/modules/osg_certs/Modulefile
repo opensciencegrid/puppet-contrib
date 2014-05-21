@@ -1,0 +1,4 @@
+name 'osg_certs'
+version '0.0.1'
+description "OSG basic cert packages"
+author 'Edgar Fajardo on behalf of the OSG'
