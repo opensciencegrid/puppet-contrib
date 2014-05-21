@@ -1,0 +1,6 @@
+name 'osg-gums'
+version '0.0.1'
+dependency 'osg_tomcat'
+description "GUMS basic puppet module for OSG"
+project_page 'https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums'
+author 'Edgar Fajardo on behalf of the OSG'
