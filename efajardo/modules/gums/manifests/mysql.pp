@@ -1,9 +1,20 @@
 #gums/manifests/mysql.pp
-# mysql gums class
-# Developed by Edgar Fajardo
-# On behalf of OSG SOFTWARE
-
-class gums::mysql{
+#==Class==
+# gums::mysql
+#
+# Designed to manage the gums tomcat installation and running.
+#=============
+#
+# Written by Edgar Fajardo (efajardo@physics.ucsd.edu)
+# For the OSG Software team
+# [*package_ensure*]
+# Specifies if a package is wanted installed or latest. Only this two vaules are allowed.
+#
+#
+class gums::mysql (
+    $package_ensure = 'installed',
+)
+{
   service { 'mysql':
     ensure => running,
     name   => "mysqld",
@@ -16,9 +27,9 @@ class gums::mysql{
   }
 
   package{ 'mysql':
-    ensure   => 'present',
+    ensure   => $package_ensure,
     provider => 'yum',
-    name     =>  "mysql.x86_64",
+    name     => "mysql.x86_64",
   }
              
 }

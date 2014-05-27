@@ -1,30 +1,34 @@
 #gums/manifests/init.pp
-# Develoved by Edgar Fajardo on behalf
-#  OSG SOFTWARE TEAM
+# == Class: gums
 #
-class gums ($osg_release = "3.2") {
-  # Necessary modules 
-  class {'osg_release': osgver => "${osg_release}" }
-  class {'osg_certs': }
-  class {'fetch-crl': }
-  # The gums submodules
-  class {'gums::mysql': }
-  class {'gums::tomcat': }
-  
-  # The gums package itself
-  package {'osg-gums':
-    ensure   => "installed",
-    name     =>  "osg-gums",
-    provider => 'yum',
+# This module manages gums
+# Developed by Edgar Fajardo
+# on behalf of OSG Software
+#
+# == Architecture
+# It is made out of two parts:
+# gums::install for installation and cert files
+# gums::config for the actual configuration
+# === Parameters
+#
+# [*osg_version*]
+#   Specifies the osg_version under to install the repos (3.1 or 3.2)
+#
+# [*package_ensure*]
+# Specifies if a package is wanted installed or latest. Only this two vaules are allowed.
+#
+#
+class gums (
+  $osg_release    = "3.2",
+  $package_ensure = "installed",
+)
+{
+  class{ 'gums::install':
+    osg_release    => $osg_release,
+    package_ensure => $package_ensure,
   }
-
-  file { 'gums.config':
-    ensure => present,
-    path   => '/etc/gums/gums.config',
-    owner  => tomcat,
-    mode   => 600,
-    source => 'puppet:///modules/gums/gums.config'
-  }
+  class{ 'gums::config': }
+  Class['gums::install'] -> Class['gums::config']
  
  
 }
