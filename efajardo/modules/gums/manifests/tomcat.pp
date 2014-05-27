@@ -54,9 +54,9 @@ class gums::tomcat (
   }
   
   file{ 'server.xml':
-        ensure => present,
-        path   => "/etc/${tomcat}/server.xml",
-      }
+    ensure => present,
+    path   => "/etc/${tomcat}/server.xml",
+  }
   # If any of the certificates or the configuration
   # changes to restart the tomcat service.
   File['httpcert'] ~> Service['tomcat']
