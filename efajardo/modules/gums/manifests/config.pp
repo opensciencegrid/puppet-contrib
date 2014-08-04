@@ -19,7 +19,7 @@ class gums::config
     path   => '/etc/gums/gums.config',
     owner  => tomcat,
     mode   => 600,
-    source => 'puppet:///modules/gums/gums.config'
+    #source => 'puppet:///modules/gums/gums.config'
   }
 
 }
